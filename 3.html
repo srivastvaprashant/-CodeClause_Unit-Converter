@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unit Converter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(244, 212, 153);
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Unit Converter</h1>
+    <form>
+      <label for="from">From:</label>
+      <input type="number" id="from" name="from" required>
+      <select id="fromUnit" name="fromUnit">
+        <option value="cm">cm</option>
+        <option value="m">m</option>
+        <option value="km">km</option>
+      </select>
+      <label for="to">To:</label>
+      <input type="number" id="to" name="to" readonly>
+      <select id="toUnit" name="toUnit">
+        <option value="cm">cm</option>
+        <option value="m">m</option>
+        <option value="km">km</option>
+      </select>
+      <button type="button" onclick="convert()">Convert</button>
+    </form>
+    <script>
+      function convert() {
+        const from = document.getElementById("from").value;
+        const fromUnit = document.getElementById("fromUnit").value;
+        const toUnit = document.getElementById("toUnit").value;
+
+        let ratio = 1;
+        if (fromUnit === "cm" && toUnit === "m") {
+          ratio = 0.01;
+        } else if (fromUnit === "cm" && toUnit === "km") {
+          ratio = 0.00001;
+        } else if (fromUnit === "m" && toUnit === "cm") {
+          ratio = 100;
+        } else if (fromUnit === "m" && toUnit === "km") {
+          ratio = 0.001;
+        } else if (fromUnit === "km" && toUnit === "cm") {
+          ratio = 100000;
+        } else if (fromUnit === "km" && toUnit === "m") {
+          ratio = 1000;
+        }
+
+        const result = from * ratio;
+        document.getElementById("to").value = result.toFixed(2);
+      }
+    </script>
+  </body>
+</html>
